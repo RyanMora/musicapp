@@ -1,5 +1,7 @@
 class BandsController < ApplicationController
 
+  attr_reader :bands
+
   def index
     @bands = Band.all
     render :index

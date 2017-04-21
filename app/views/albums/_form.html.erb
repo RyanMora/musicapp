@@ -1,0 +1,44 @@
+<% if action == :edit %>
+  <% album_action = album_url(album) %>
+<% else %>
+  <% album_action = albums_url %>
+<% end %>
+
+<form action="<%= album_action %>" method="POST">
+
+  <%= auth_token %>
+
+  <% if action == :edit %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+
+  <label>Album Name:
+    <input type="text" name="album[name]" value="<%=album.name%>">
+  </label>
+
+  <br><br>
+
+  <label>Band Name:
+    <select name="band[name]">
+      <% bands.each do |band| %>
+        <option value="<%= band.name %>"> <%= band.name %> </option>
+      <% end %>
+    </select>
+  </label>
+
+  <br><br>
+
+  <label>
+    <input type="radio" name="album[record_type]"
+    <%= "checked" if album.record_type == "studio" %> value="studio">Studio
+  </label>
+  <label>
+    <input type="radio" name="album[record_type]"
+    <%= "checked" if album.record_type == "live" %> value="live">Live
+  </label>
+
+  <br><br>
+
+  <input type="submit">
+
+</form>

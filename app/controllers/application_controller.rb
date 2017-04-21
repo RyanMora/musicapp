@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :logged_in?
+  helper_method :bands
 
   def login(user)
     session[:session_token] = user.reset_session_token!
@@ -20,6 +21,10 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     !current_user.nil?
+  end
+
+  def bands
+    @bands = Band.all
   end
 
 end
